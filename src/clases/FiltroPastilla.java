@@ -4,7 +4,7 @@ public class FiltroPastilla implements Filtro {
 
 	private double revoluciones;
 
-	public double ejecutar(int rev) {
+	public double ejecutar(int rev, EstadoMotor estadoMotor) {
 		return revoluciones;
 	}
 }
