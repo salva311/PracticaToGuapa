@@ -34,14 +34,24 @@ public class ControladorCoche extends Thread {
 		// Lee de los controles
 		this.estado = this.targetInput.getEstado();
 		
-		// Lee del Motor
-		double rpm = motor.getRevoluiones();
+		// Saca la informacion del motor
+		InfoMotor im = this.genInfoMotor();
 		
 		// Invoca jestor de filtros
-		this.gFiltros.ejecutar(rpm, this.estado);
+		im = this.gFiltros.ejecutar(im);
 		
 		// Actualiza Display
-		this.targetDisplay.actualizaInformacion(this.motor);
+		this.targetDisplay.actualizaInformacion(im);
+	}
+	
+	private InfoMotor genInfoMotor() {
+		InfoMotor im = new InfoMotor();
+		
+		im.setEstado(this.estado);
+		im.setCombustible(this.motor.getLitros());
+		im.setRevoluciones(this.motor.getRevoluiones());
+		
+		return im;
 	}
 	
 	public void encender() {
