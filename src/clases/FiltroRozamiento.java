@@ -2,8 +2,9 @@ package clases;
 
 public class FiltroRozamiento implements Filtro {
 	
- public double ejecutar(double revoluciones) {
-	 if (revoluciones > 0) revoluciones -= 10;
-		return revoluciones;
+ public InfoMotor ejecutar(InfoMotor info) {
+	 double rev = info.getRevoluciones();
+	 if (rev > 0) info.setRevoluciones(rev-10);
+		return info;
 	}
 }

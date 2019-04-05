@@ -2,23 +2,21 @@ package clases;
 
 public class FiltroCombustible implements Filtro {
 	private double revoluciones;
-	private int litrosCombustible;
+	private double litrosCombustible;
 
 	public FiltroCombustible() {
 		this.litrosCombustible = 0;
 		this.revoluciones = 0;
 	}
 
-	public double ejecutar(double revoluciones) {
-		litrosCombustible = (int) (litrosCombustible - revoluciones * revoluciones * 5 * 0.0000000001);
-		return revoluciones;
-	}
-
-	public void repostar(int litros) {
-		litrosCombustible += litros;
-	}
-
-	public double getRev() {
-		return revoluciones;
+	public InfoMotor ejecutar(InfoMotor info) {
+		revoluciones = info.getRevoluciones();
+		double litros = info.getCombustible();
+		litrosCombustible = (litros - revoluciones * revoluciones * 5 * 0.0000000001);
+		info.setCombustible(litrosCombustible);
+		if (info.getCombustible() == 0) {
+			info.setRepostar(true);
+		}
+		return info;
 	}
 }

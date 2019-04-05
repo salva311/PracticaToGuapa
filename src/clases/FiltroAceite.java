@@ -10,11 +10,12 @@ public class FiltroAceite implements Filtro {
 		this.acumuladas = 0;
 	}
 
-	public double ejecutar(double revoluciones) {
+	public InfoMotor ejecutar(InfoMotor info) {
+		double revoluciones = info.getRevoluciones();
 		if (revoluciones > 5000000) {
-			System.out.println("cambiar aceite");
+			info.setCambiarAceite(true);
 		}
-		return revoluciones;
+		return info;
 	}
 
 	public double getAcumuladas() {
