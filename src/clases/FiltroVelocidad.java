@@ -2,7 +2,7 @@ package clases;
 
 public class FiltroVelocidad implements Filtro {
 
-	public double ejecutar(int revoluciones, EstadoMotor estadoMotor) {
+	public double ejecutar(int revoluciones) {
 
 		if (EstadoMotor.ACELERANDO == estadoMotor)
 			revoluciones += 100;
