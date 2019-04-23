@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class Salpicadero extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private double velocidad;
+	private double velocidad; // Km/h
 	private double distancia;
 	private Ellipse2D velocimetro;
 	private Line2D segmentoCorto;
@@ -30,7 +30,8 @@ public class Salpicadero extends JPanel {
 	public Salpicadero(InfoMotor coche)
 	  {
 	    this.coche = coche;
-	    this.velocidad = 0.0D;
+//	    this.velocidad = 0.0D;
+	    this.velocidad = 50.0D;
 	    this.distancia = 0.0D;
 	    
 	    setSize(400, 400);
@@ -39,12 +40,14 @@ public class Salpicadero extends JPanel {
 	    this.segmentoCorto = new Line2D.Double(-135.0D, 0.0D, -127.0D, 0.0D);
 	    this.segmentoLargo = new Line2D.Double(-135.0D, 0.0D, -119.0D, 0.0D);
 	    this.cuadroDistancia = new Rectangle2D.Double(148.0D, 230.0D, 50.0D, 20.0D);
+//	    Declara aguja y construye perimertro
 	    this.aguja = new GeneralPath();
-	    this.aguja.moveTo(10.0F, 0.0F);
+	    this.aguja.moveTo(10.0F, 0.0F); // Centro de la aguja
 	    this.aguja.lineTo(0.0F, 10.0F);
 	    this.aguja.lineTo(-130.0F, 0.0F);
 	    this.aguja.lineTo(0.0F, -10.0F);
 	    this.aguja.closePath();
+
 	    this.t = new AffineTransform();
 	  }
 
@@ -75,6 +78,8 @@ public class Salpicadero extends JPanel {
 		g2.draw(this.velocimetro);
 		this.t.setToRotation(Math.toRadians(-30.0D));
 		g2.transform(this.t);
+		
+//		Dibuja segmento al rededor de la circumferencia
 		g2.draw(this.segmentoLargo);
 		for (double angulo = 1.0D; angulo <= 12.0D; angulo += 1.0D) {
 			this.t.setToRotation(Math.toRadians(10.0D));
@@ -86,7 +91,17 @@ public class Salpicadero extends JPanel {
 		}
 		this.t.setToRotation(Math.toRadians(120.0D + this.velocidad));
 		g2.transform(this.t);
+		
+		// Pintar Aguja
 		g2.setPaint(Color.yellow);
+		AffineTransform at = new AffineTransform();
+//		Regla de 3
+//		gradosAguja			x km/h
+//		---------------  = ----------------
+//			2pi				380 km/h
+		
+		at.rotate(0.8*Math.PI);
+		this.aguja.transform(at);
 		g2.fill(this.aguja);
 	}
 	
@@ -110,7 +125,7 @@ public class Salpicadero extends JPanel {
 	}
 
 	public void repintar() {
-		this.velocidad = this.getVelocidad();
+//		this.velocidad = this.getVelocidad();
 		this.distancia = this.getDistancia();
 		repaint();
 	}

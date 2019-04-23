@@ -30,23 +30,16 @@ public class ControladorCoche extends Thread {
 		this.motor.cambiarEstado(this.targetInput.getEstado());
 		
 		// Saca la informacion del motor
-		InfoMotor im = this.genInfoMotor();
+		InfoMotor im = this.motor.getInfo();
 		
 		// Invoca jestor de filtros
 		im = this.gFiltros.ejecutar(im);
 		
+		// Actualiza motor
+		this.motor.setInfo(im);
+		
 		// Actualiza Display
 		this.targetDisplay.actualizaInformacion(im);
-	}
-	
-	private InfoMotor genInfoMotor() {
-		InfoMotor im = new InfoMotor();
-		
-		im.setEstado(this.motor.getEstado());
-		im.setCombustible(this.motor.getLitros());
-		im.setRevoluciones(this.motor.getRevoluiones());
-		
-		return im;
 	}
 	
 	public void encender() {

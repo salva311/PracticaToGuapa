@@ -7,11 +7,11 @@ import java.util.LinkedList;
 	private LinkedList<Filtro> lista;
 	private InfoMotor info;
 	
-	public GestorFiltros(InfoMotor info) {
+	public InfoMotor GestorFiltros(InfoMotor info) {
 		this.lista = new LinkedList<Filtro>();
 		this.info = info;
 	}
-	public void añadirFiltro(Filtro filtro) {
+	public void aÃ±adirFiltro(Filtro filtro) {
 		lista.add(filtro);
 	}
 	
